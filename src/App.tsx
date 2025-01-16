@@ -20,7 +20,7 @@ function App() {
             </header>
             <div className="w-full h-full p-12">
                 <div className="flex flex-col items-center justify-center border-8">
-                    <h1>Login Page</h1>
+                    <h1>Login Page Test</h1>
                     <form onSubmit={handleLogin}>
                         <input
                             type="text"
