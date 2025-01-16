@@ -19,14 +19,7 @@ function App() {
                 <nav></nav>
             </header>
             <div className="w-full h-full p-12">
-                <div
-                    className="flex flex-col items-center justify-center border-2"
-                    // style={{
-                    //     display: "flex",
-                    //     alignItems: "center",
-                    //     justifyContent: "center",
-                    // }}
-                >
+                <div className="flex flex-col items-center justify-center border-2">
                     <h1>Login Page</h1>
                     <form onSubmit={handleLogin}>
                         <input
