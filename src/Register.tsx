@@ -1,6 +1,6 @@
 import React from "react";
 
-function App() {
+const Register: React.FC = () => {
     const [formData, setFormData] = React.useState({
         fullname: "",
         username: "",
@@ -121,6 +121,6 @@ function App() {
             </div>
         </div>
     );
-}
+};
 
-export default App;
+export default Register;
