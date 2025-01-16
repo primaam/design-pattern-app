@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [username, setUsername] = React.useState<string>("");
+    const [password, setPassword] = React.useState<string>("");
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const handleLogin = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!username || !password) {
+            alert("Username and Password cannot be empty");
+        } else {
+            alert(`Welcome, ${username}!`);
+        }
+    };
+
+    return (
+        <div>
+            <header>
+                <nav></nav>
+            </header>
+            <div className="w-full h-full p-12">
+                <div
+                    className="flex flex-col items-center justify-center border-2"
+                    // style={{
+                    //     display: "flex",
+                    //     alignItems: "center",
+                    //     justifyContent: "center",
+                    // }}
+                >
+                    <h1>Login Page</h1>
+                    <form onSubmit={handleLogin}>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button className="h-14 w-16 rounded-md bg-green-300" type="submit">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default App
+export default App;
