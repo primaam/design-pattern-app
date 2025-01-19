@@ -1,90 +1,64 @@
 import React from "react";
-import { PaperAirplaneIcon, ArrowUpCircleIcon } from "@heroicons/react/24/solid";
+import FeatureBased from "./featureBased";
+import { Link } from "react-router";
 
 function App() {
-    const [isLoading, setIsLoading] = React.useState(true);
-    const [inputValue, setInputValue] = React.useState<string>("");
-    const [contentDashboard, setContentDashboard] = React.useState<string[]>([]);
+    const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
-    React.useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 2500);
-        return () => {
-            clearTimeout(timer);
-        };
-    }, []);
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (inputValue) {
-            setContentDashboard([...contentDashboard, inputValue]);
-            setInputValue("");
-        }
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            {/* Spinner */}
-            {isLoading && (
-                <div
-                    className={`opacity-100 scale-100 transform transition-opacity duration-500 
-                      flex flex-col items-center justify-center absolute inset-0`}
-                >
-                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
-                    <p className="mt-4 text-blue-600 font-medium">Loading...</p>
-                </div>
-            )}
-            {!isLoading && (
-                <>
-                    {contentDashboard.length > 0 && (
-                        <div className="fixed bottom-1/4 flex flex-col items-start w-11/12 max-w-4xl bg-white h-fit p-6 rounded-lg shadow-md mb-4">
-                            <div className="flex flex-col items-start w-full max-h-96 overflow-y-auto p-4 rounded-md">
-                                {contentDashboard.map((msg, i) => (
-                                    <div
-                                        key={i}
-                                        className={`p-2 mb-2 rounded-md ${"bg-blue-100 self-end"}`}
-                                    >
-                                        <p>{msg}</p>
-                                    </div>
-                                ))}
+        <>
+            <header className="bg-blue-500 text-white p-4">
+                <nav className="container mx-auto flex justify-between">
+                    <Link to="/" className="block px-4 py-2 hover:underline">
+                        Home
+                    </Link>
+                    <div className="relative">
+                        <button className="bg-blue-700 p-2 rounded-md" onClick={toggleDropdown}>
+                            Design Patterns
+                        </button>
+                        {isDropdownOpen && (
+                            <div className="absolute bg-white text-black shadow-lg rounded-md mt-2 w-48">
+                                <Link
+                                    to="feature-based"
+                                    className="block px-4 py-2 hover:bg-gray-200 rounded-t"
+                                >
+                                    Feature-Based
+                                </Link>
+                                <Link
+                                    to="container-presentational"
+                                    className="block px-4 py-2 hover:bg-gray-200"
+                                >
+                                    Container-Presentational
+                                </Link>
+                                <Link
+                                    to="atomic"
+                                    className="block px-4 py-2 hover:bg-gray-200 rounded-b"
+                                >
+                                    Atomic
+                                </Link>
                             </div>
-                        </div>
-                    )}
-
-                    <div
-                        className={`
-                      flex flex-col items-center w-11/12 max-w-4xl bg-white p-6 rounded-lg shadow-md
-                      transform transition-all duration-1000 ease-in
-                      ${contentDashboard.length > 0 ? "fixed bottom-5" : ""}
-                      `}
-                    >
-                        <h1
-                            className={`text-xl transition-all duration-1000 font-bold text-center mb-6 text-black `}
-                        >
-                            Selamat datang, primaam! Apa kabar hari ini?
-                        </h1>
-
-                        <form
-                            onSubmit={handleSubmit}
-                            className="flex items-center justify-center w-full h-20 space-x-2"
-                        >
-                            <input
-                                type="text"
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                placeholder="Ada hal yang ingin Anda diskusikan?"
-                                className="h-12 px-4 border border-gray-300 rounded-md w-full focus:outline-none focus:ring focus:ring-blue-200"
-                            />
-                            <button
-                                type="submit"
-                                className="p-2 text-gray-500 rounded-md hover:text-gray-700"
-                            >
-                                <PaperAirplaneIcon className="h-6 w-6" />
-                            </button>
-                        </form>
+                        )}
                     </div>
-                </>
-            )}
-        </div>
+                </nav>
+            </header>
+            <div
+                onClick={() => setIsDropdownOpen(false)}
+                className="flex items-center justify-center h-screen w-full"
+            >
+                <div className="w-full max-w-4xl border-2 border-gray-400 p-8 rounded-xl shadow-xl ml-4 mr-4">
+                    <h2 className="text-3xl font-semibold text-center mb-6 text-gray-800">
+                        Main Navigation
+                    </h2>
+                    <p className="text-center text-gray-700 opacity-80">
+                        Choose your design pattern at the header.
+                    </p>
+                </div>
+            </div>
+        </>
     );
 }
 
