@@ -1,5 +1,4 @@
 import React from "react";
-import FeatureBased from "./featureBased";
 import { Link } from "react-router";
 
 function App() {
