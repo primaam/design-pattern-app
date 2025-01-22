@@ -4,13 +4,17 @@ import LoginFeatureBased from "./auth/login";
 import RegisterFeatureBased from "./auth/register";
 import DashboardFeatureBased from "./dashboard";
 
-const FeatureBasedWrapper: React.FC = () => {
+const FeatureBasedContext = React.createContext<string>("");
+
+const FeatureBasedWrapper = () => {
     return (
-        <Routes>
-            <Route index path="auth/register" element={<LoginFeatureBased />} />
-            <Route path="auth/register" element={<RegisterFeatureBased />} />
-            <Route path="dashboard" element={<DashboardFeatureBased />} />
-        </Routes>
+        <FeatureBasedContext.Provider value="sddh">
+            <Route path="feature-based">
+                <Route index element={<LoginFeatureBased />} />
+                <Route path="auth/register" element={<RegisterFeatureBased />} />
+                <Route path="dashboard" element={<DashboardFeatureBased />} />
+            </Route>
+        </FeatureBasedContext.Provider>
     );
 };
 

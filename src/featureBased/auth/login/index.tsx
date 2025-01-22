@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const LoginFeatureBased: React.FC = () => {
+    const navigate = useNavigate();
+
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [showPassword, setShowPassword] = React.useState(false);
@@ -9,6 +12,7 @@ const LoginFeatureBased: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         alert("Login successful!");
+        navigate("/feature-based/dashboard");
     };
 
     return (
@@ -92,7 +96,10 @@ const LoginFeatureBased: React.FC = () => {
                     <div className="text-center">
                         <p className="text-sm text-gray-700">
                             Don’t have an account?{" "}
-                            <a href="/register" className="text-blue-500 hover:underline">
+                            <a
+                                href="/feature-based/auth/register"
+                                className="text-blue-500 hover:underline"
+                            >
                                 Register here
                             </a>
                         </p>

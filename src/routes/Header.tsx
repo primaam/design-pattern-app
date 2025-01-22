@@ -1,13 +1,16 @@
 import React from "react";
-import { Link } from "react-router";
-import Home from "../Home";
+import { Link, Outlet } from "react-router";
+import { MainContext } from "../MainContext";
 
-const MainNavigation: React.FC = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+const Header: React.FC = () => {
+    const context = React.useContext(MainContext);
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
+    if (!context) {
+        throw new Error("MainContext must be used within MainContextProvider");
+    }
+
+    const { isDropdownOpen, toggleDropdown } = context;
+
     return (
         <>
             <header className="bg-blue-500 text-white p-4">
@@ -16,7 +19,11 @@ const MainNavigation: React.FC = () => {
                         Home
                     </Link>
                     <div className="relative">
-                        <button className="bg-blue-700 p-2 rounded-md" onClick={toggleDropdown}>
+                        <button
+                            className="bg-blue-700 p-2 rounded-md"
+                            // onBlur={toggleDropdown}
+                            onClick={toggleDropdown}
+                        >
                             Design Patterns
                         </button>
                         {isDropdownOpen && (
@@ -44,9 +51,11 @@ const MainNavigation: React.FC = () => {
                     </div>
                 </nav>
             </header>
-            <Home onClick={() => setIsDropdownOpen(false)} />
+            <main>
+                <Outlet />
+            </main>
         </>
     );
 };
 
-export default MainNavigation;
+export default Header;

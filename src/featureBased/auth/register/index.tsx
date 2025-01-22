@@ -113,7 +113,7 @@ const RegisterFeatureBased = () => {
                 <div className="text-center">
                     <p className="text-sm">
                         Already have an account?{" "}
-                        <a href="/login" className="text-blue-500 hover:underline">
+                        <a href="/feature-based" className="text-blue-500 hover:underline">
                             Back to Login
                         </a>
                     </p>
