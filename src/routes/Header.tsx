@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import { MainContext } from "../MainContext";
 
 const Header: React.FC = () => {
+    const navigate = useNavigate();
     const context = React.useContext(MainContext);
 
     if (!context) {
@@ -10,6 +11,11 @@ const Header: React.FC = () => {
     }
 
     const { isDropdownOpen, toggleDropdown } = context;
+
+    const handleNavigationHeader = (path: string) => {
+        toggleDropdown();
+        navigate(`${path}`);
+    };
 
     return (
         <>
@@ -28,32 +34,33 @@ const Header: React.FC = () => {
                         </button>
                         {isDropdownOpen && (
                             <div className="absolute bg-white text-black shadow-lg rounded-md mt-2 w-48">
-                                <Link
-                                    to="feature-based"
-                                    className="block px-4 py-2 hover:bg-gray-200 rounded-t"
+                                <a
+                                    onClick={() => handleNavigationHeader("feature-based")}
+                                    className="block px-4 py-2 w-100 hover:bg-gray-200 rounded-t"
                                 >
                                     Feature-Based
-                                </Link>
-                                <Link
-                                    to="container-presentational"
-                                    className="block px-4 py-2 hover:bg-gray-200"
+                                </a>
+                                <a
+                                    onClick={() =>
+                                        handleNavigationHeader("container-presentational")
+                                    }
+                                    className="block px-4 py-2 w-100 hover:bg-gray-200 rounded-t"
                                 >
                                     Container-Presentational
-                                </Link>
-                                <Link
-                                    to="atomic"
-                                    className="block px-4 py-2 hover:bg-gray-200 rounded-b"
+                                </a>
+                                <a
+                                    onClick={() => handleNavigationHeader("atomic")}
+                                    className="block px-4 py-2 w-100 hover:bg-gray-200 rounded-t"
                                 >
                                     Atomic
-                                </Link>
+                                </a>
                             </div>
                         )}
                     </div>
                 </nav>
             </header>
-            <main>
-                <Outlet />
-            </main>
+
+            <Outlet />
         </>
     );
 };
