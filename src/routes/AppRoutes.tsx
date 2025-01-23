@@ -5,10 +5,12 @@ import RegisterFeatureBased from "../featureBased/auth/register";
 import DashboardFeatureBased from "../featureBased/dashboard";
 import Home from "./Home";
 import Header from "./Header";
-import FeatureBasedWrapper from "../featureBased";
 import LoginCnP from "../containerPresentational/pages/LoginCnP";
 import RegisterCnP from "../containerPresentational/pages/RegisterCnP";
 import DashboardCnP from "../containerPresentational/pages/DashboardCnP";
+import LoginAtomic from "../atomic/product/pages/LoginAtomic";
+import RegisterAtomic from "../atomic/product/pages/RegisterAtomic";
+import DashboardAtomic from "../atomic/product/pages/DashboardAtomic";
 
 const AppRoutes: React.FC = () => {
     return (
@@ -29,6 +31,13 @@ const AppRoutes: React.FC = () => {
                         <Route index element={<LoginCnP />} />
                         <Route path="auth/register" element={<RegisterCnP />} />
                         <Route path="dashboard" element={<DashboardCnP />} />
+                    </Route>
+
+                    {/* Atomic */}
+                    <Route path="atomic">
+                        <Route index element={<LoginAtomic />} />
+                        <Route path="auth/register" element={<RegisterAtomic />} />
+                        <Route path="dashboard" element={<DashboardAtomic />} />
                     </Route>
                 </Route>
             </Routes>

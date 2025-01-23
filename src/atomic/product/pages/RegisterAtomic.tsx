@@ -35,15 +35,13 @@ const RegisterAtomic = () => {
         }
 
         setError("");
-        navigate("/container-presentational");
+        navigate("/atomic");
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-md m-2 md:max-w-xl md:p-8 md:m-4">
-                <h2 className="text-2xl font-bold mb-6 text-center">
-                    Register Container-Presentational
-                </h2>
+                <h2 className="text-2xl font-bold mb-6 text-center">Register Atomic</h2>
                 {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -113,7 +111,7 @@ const RegisterAtomic = () => {
                 <div className="text-center">
                     <p className="text-sm">
                         Already have an account?{" "}
-                        <a href="/feature-based" className="text-blue-500 hover:underline">
+                        <a href="/atomic" className="text-blue-500 hover:underline">
                             Back to Login
                         </a>
                     </p>
