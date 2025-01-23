@@ -31,7 +31,7 @@ const InputPasswordField: React.FC<InputPasswordFieldProps> = ({
     type,
 }) => {
     return (
-        <div>
+        <div className="mb-4">
             <BaseLabel label={label} htmlFor={htmlFor} />
             <div className="relative">
                 <BaseInput

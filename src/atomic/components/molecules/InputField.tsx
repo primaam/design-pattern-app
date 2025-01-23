@@ -25,7 +25,7 @@ const InputField: React.FC<InputFieldProps> = ({
     name,
 }) => {
     return (
-        <div>
+        <div className="mb-4">
             <BaseLabel label={label} htmlFor={htmlFor} />
             <BaseInput
                 name={name}
