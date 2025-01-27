@@ -1,49 +1,52 @@
 import React from "react";
+import { InputProps, InputPasswordProps } from "../types/inputTypes";
 import { InputField, InputPasswordField, InputSavePasswordField } from "../molecules";
 import { PrimaryButton } from "../atoms";
 
-type PasswordInputType = "text" | "password";
-interface InputFieldProps {
-    label: string;
-    htmlFor: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    name: string;
-    id?: string;
-}
-
-interface UsernameProps extends InputFieldProps {
-    placeholder: string;
-    value: string;
-    required: boolean;
-    type: React.HTMLInputTypeAttribute;
-    className?: string;
-}
-interface PasswordProps extends InputFieldProps {
-    placeholder: string;
-    value: string;
-    required: boolean;
-    type: PasswordInputType;
-    className?: string;
-    showPassword: boolean;
-    onClickShowPassword: () => void;
-}
-interface SavePasswordProps extends InputFieldProps {
-    checked: boolean;
-}
-
 interface LoginFormProps {
     onSubmit: React.FormEventHandler<HTMLFormElement>;
-    username: UsernameProps;
-    password: PasswordProps;
-    savePassword: SavePasswordProps;
+    usernameAttribute: InputProps;
+    passwordAttribute: InputProps;
+    savePasswordAttribute: InputProps;
+    onClickShowPassword: () => void;
+    showPassword: boolean;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, username, password, savePassword }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+    onSubmit,
+    usernameAttribute,
+    passwordAttribute,
+    savePasswordAttribute,
+    onClickShowPassword,
+    showPassword,
+}) => {
     return (
         <form onSubmit={onSubmit} className="space-y-4">
-            <InputField {...username} />
-            <InputPasswordField {...password} />
-            <InputSavePasswordField {...savePassword} />
+            <InputField
+                label="Username"
+                inputProps={{
+                    placeholder: "Enter your username here",
+                    type: "text",
+                    ...usernameAttribute,
+                }}
+            />
+            <InputPasswordField
+                label="Password"
+                inputProps={{
+                    placeholder: "Enter your password here",
+                    type: showPassword ? "text" : "password",
+                    ...passwordAttribute,
+                }}
+                onClickShowPassword={onClickShowPassword}
+                showPassword={showPassword}
+            />
+            <InputSavePasswordField
+                label="Save password"
+                inputProps={{
+                    type: "checkbox",
+                    ...savePasswordAttribute,
+                }}
+            />
             <PrimaryButton type="submit">Login</PrimaryButton>
         </form>
     );

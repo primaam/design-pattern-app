@@ -1,41 +1,16 @@
 import React from "react";
 import { BaseInput, BaseLabel } from "../atoms";
-
+import { InputProps } from "../types/inputTypes";
 interface InputFieldProps {
     label: string;
-    htmlFor: string;
-    value: string | number;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    required: boolean;
-    type: React.HTMLInputTypeAttribute;
-    id?: string;
-    placeholder: string;
-    name: string;
+    inputProps: InputProps;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
-    label,
-    htmlFor,
-    value,
-    onChange,
-    required = false,
-    type = "text",
-    id,
-    placeholder = "",
-    name,
-}) => {
+const InputField: React.FC<InputFieldProps> = ({ label, inputProps }) => {
     return (
         <div className="mb-4">
-            <BaseLabel label={label} htmlFor={htmlFor} />
-            <BaseInput
-                name={name}
-                type={type}
-                id={id}
-                value={value}
-                onChange={onChange}
-                placeholder={placeholder}
-                required={required}
-            />
+            <BaseLabel label={label} />
+            <BaseInput {...inputProps} />
         </div>
     );
 };

@@ -23,54 +23,55 @@ const RegisterAtomic = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
-    const createInputObj = (
-        name: string,
-        label: string,
-        type: string,
-        placeholder: string,
-        required: boolean
-    ) => ({
-        value: formData[name as keyof typeof formData],
-        name,
-        htmlFor: name,
-        label,
-        placeholder,
-        required,
-        type,
+    const usernameObj = {
+        value: formData.username,
+        name: "username",
+        htmlFor: "username",
+        label: "Username",
+        placeholder: "Enter your username here",
+        required: true,
+        type: "text",
         onChange: handleChange,
-    });
+    };
 
-    const usernameObj = createInputObj(
-        "username",
-        "Username",
-        "text",
-        "Enter your username here",
-        true
-    );
-    const fnameObj = createInputObj(
-        "fullname",
-        "Full Name",
-        "text",
-        "Enter your full name here",
-        true
-    );
-    const passwordObj = createInputObj(
-        "password",
-        "Password",
-        "password",
-        "Enter your password here",
-        true
-    );
-    const repasswordObj = createInputObj(
-        "repassword",
-        "Re-enter Password",
-        "password",
-        "Re-enter your password here",
-        false
-    );
+    const fnameObj = {
+        value: formData.fullname,
+        name: "fullname",
+        htmlFor: "fullname",
+        label: "Full Name",
+        placeholder: "Enter your full name here",
+        required: true,
+        type: "text",
+        onChange: handleChange,
+    };
+
+    const passwordObj = {
+        value: formData.password,
+        name: "password",
+        htmlFor: "password",
+        label: "Password",
+        placeholder: "Enter your password here",
+        required: true,
+        type: "password",
+        onChange: handleChange,
+    };
+
+    const repasswordObj = {
+        value: formData.repassword,
+        name: "repassword",
+        htmlFor: "repassword",
+        label: "Re-enter Password",
+        placeholder: "Re-enter your password here",
+        required: true,
+        type: "password",
+        onChange: handleChange,
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -105,6 +106,7 @@ const RegisterAtomic = () => {
                     password={passwordObj}
                     repassword={repasswordObj}
                 />
+
                 <BaseDivider />
                 <FooterAuthForm
                     anchorStr="Back to Login"

@@ -1,6 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { BaseCard, BaseDivider, BaseLayout, BaseTitle } from "../../components/atoms";
+import {
+    BaseCard,
+    BaseDivider,
+    BaseErrorText,
+    BaseLayout,
+    BaseTitle,
+} from "../../components/atoms";
 import { FooterAuthForm } from "../../components/molecules";
 import { LoginForm } from "../../components/organism";
 
@@ -11,6 +17,8 @@ const LoginAtomic: React.FC = () => {
     const [password, setPassword] = React.useState("");
     const [showPassword, setShowPassword] = React.useState(false);
     const [savePassword, setSavePassword] = React.useState(false);
+
+    const [error, setError] = React.useState("");
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -31,40 +39,14 @@ const LoginAtomic: React.FC = () => {
         }
     };
 
-    const usernameObj = {
-        value: username,
-        htmlFor: "username",
-        label: "Username",
-        name: "username",
-        placeholder: "Enter your username here",
-        required: true,
-        type: "text",
-        onChange: handleChange,
-    };
-
-    const passwordObj = {
-        htmlFor: "password",
-        label: "Password",
-        name: "password",
-        onChange: handleChange,
-        onClickShowPassword: handleShowPassword,
-        placeholder: "Enter your password here",
-        required: true,
-        value: password,
-        showPassword: showPassword,
-        type: showPassword ? ("text" as const) : ("password" as const),
-    };
-
-    const savePasswordObj = {
-        checked: savePassword,
-        htmlFor: "savePassword",
-        label: "Save Password",
-        name: "savePassword",
-        onChange: () => setSavePassword(!savePassword),
-    };
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!username || !password) {
+            setError("All fields are required.");
+            return;
+        }
+
         alert("Login successful!");
         navigate("/atomic/dashboard");
     };
@@ -72,12 +54,25 @@ const LoginAtomic: React.FC = () => {
         <BaseLayout>
             <BaseCard>
                 <BaseTitle title="Login Atomic" />
-
+                {error && <BaseErrorText errorMsg={`${error}`} />}
                 <LoginForm
+                    usernameAttribute={{
+                        value: username,
+                        name: "username",
+                        onChange: handleChange,
+                    }}
+                    passwordAttribute={{
+                        name: "password",
+                        onChange: handleChange,
+                        value: password,
+                    }}
+                    savePasswordAttribute={{
+                        checked: savePassword,
+                        onChange: () => setSavePassword(!savePassword),
+                    }}
                     onSubmit={handleSubmit}
-                    username={usernameObj}
-                    password={passwordObj}
-                    savePassword={savePasswordObj}
+                    onClickShowPassword={handleShowPassword}
+                    showPassword={showPassword}
                 />
 
                 <BaseDivider />

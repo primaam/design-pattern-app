@@ -1,34 +1,17 @@
 import React from "react";
+import { InputProps } from "../types/inputTypes";
 import { BaseInput, BaseLabel } from "../atoms";
 
 interface InputSavePasswordFieldProps {
     label: string;
-    htmlFor: string;
-    checked: boolean;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    id?: string;
-    name: string;
+    inputProps: InputProps;
 }
 
-const InputSavePasswordField: React.FC<InputSavePasswordFieldProps> = ({
-    label,
-    htmlFor,
-    checked = false,
-    onChange,
-    id = "",
-    name,
-}) => {
+const InputSavePasswordField: React.FC<InputSavePasswordFieldProps> = ({ label, inputProps }) => {
     return (
         <div className="flex items-center">
-            <BaseInput
-                name={name}
-                type={"checkbox"}
-                id={id}
-                checked={checked}
-                onChange={onChange}
-                className="mr-2"
-            />
-            <BaseLabel label={label} htmlFor={htmlFor} />
+            <BaseInput {...inputProps} className="mr-2" />
+            <BaseLabel label={label} />
         </div>
     );
 };

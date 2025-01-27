@@ -1,46 +1,15 @@
 import React from "react";
+import { InputProps } from "../types/inputTypes";
 import { InputField } from "../molecules";
 import { PrimaryButton } from "../atoms";
 
-interface InputFieldProps {
-    label: string;
-    htmlFor: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    name: string;
-    id?: string;
-}
-
-interface NameProps extends InputFieldProps {
-    placeholder?: string;
-    value: string;
-    required: boolean;
-    type?: React.HTMLInputTypeAttribute;
-    className?: string;
-}
-
-interface PasswordProps extends InputFieldProps {
-    placeholder: string;
-    value: string;
-    required: boolean;
-    type: React.HTMLInputTypeAttribute;
-    className?: string;
-}
-
 interface RegisterProps {
     onSubmit: React.FormEventHandler<HTMLFormElement>;
-    username: NameProps;
-    fullname: NameProps;
-    password: PasswordProps;
-    repassword: PasswordProps;
+    username: InputProps;
+    fullname: InputProps;
+    password: InputProps;
+    repassword: InputProps;
 }
-
-const defaultValue = {
-    label: "Full Name",
-    htmlFor: "fname",
-    required: false,
-    placeholder: "Enter your full name here",
-    type: "text",
-};
 
 const RegisterForm: React.FC<RegisterProps> = ({
     onSubmit,
@@ -51,17 +20,13 @@ const RegisterForm: React.FC<RegisterProps> = ({
 }) => {
     return (
         <form onSubmit={onSubmit}>
-            <InputField {...fullname} {...defaultValue} />
+            <InputField label="Full Name" inputProps={fullname} />
+            <InputField label="Username" inputProps={username} />
+            <InputField label="Password" inputProps={{ type: "password", ...password }} />
             <InputField
-                {...username}
-                label="Username"
-                htmlFor="username"
-                required
-                placeholder="Enter your username here"
-                type="text"
+                label="Re-enter Password"
+                inputProps={{ type: "password", ...repassword }}
             />
-            <InputField {...password} type="password" />
-            <InputField {...repassword} type="password" />
             <PrimaryButton type="submit">Register</PrimaryButton>
         </form>
     );
