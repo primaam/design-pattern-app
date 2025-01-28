@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { CustomLayout, CustomCard, CustomTitle, CustomDivider, FooterAuth } from "../../components";
 
 const RegisterCnP = () => {
     const navigate = useNavigate();
@@ -39,11 +40,10 @@ const RegisterCnP = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-md m-2 md:max-w-xl md:p-8 md:m-4">
-                <h2 className="text-2xl font-bold mb-6 text-center">
-                    Register Container-Presentational
-                </h2>
+        <CustomLayout>
+            <CustomCard>
+                <CustomTitle title="Register Container-Presentational" />
+
                 {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -109,17 +109,16 @@ const RegisterCnP = () => {
                         Register
                     </button>
                 </form>
-                <hr className="my-6" />
-                <div className="text-center">
-                    <p className="text-sm">
-                        Already have an account?{" "}
-                        <a href="/feature-based" className="text-blue-500 hover:underline">
-                            Back to Login
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
+
+                <CustomDivider />
+
+                <FooterAuth
+                    str="Already have an account? "
+                    url="/container-presentational/auth/register"
+                    urlStr="Back to Login"
+                />
+            </CustomCard>
+        </CustomLayout>
     );
 };
 
